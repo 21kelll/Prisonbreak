@@ -82,18 +82,18 @@ while not finished:
     if userInput.lower() == "q":
         print("Thanks for playing! Better luck next time.")
         break
-        
+
     # -- North
     elif userInput.lower() == "n":
-        next_room = current_room[1]
+        next_room = room_list[current_room][1]
         if next_room is None:
             print("You can't go that way.")
         else:
             current_room = next_room
-        
+
     # -- East
     elif userInput.lower() == "e":
-        next_room = current_room[2]
+        next_room = room_list[current_room][2]
         if next_room is None:
             print("You can't go that way.")
         else:
@@ -101,15 +101,15 @@ while not finished:
 
     # -- South
     elif userInput.lower() == "s":
-        next_room = current_room[3]
+        next_room = room_list[current_room][3]
         if next_room is None:
             print("You can't go that way.")
         else:
             current_room = next_room
 
-        # -- West
+    # -- West
     elif userInput.lower() == "w":
-        next_room = current_room[4]
+        next_room = room_list[current_room][4]
         if next_room is None:
             print("You can't go that way.")
         else:
