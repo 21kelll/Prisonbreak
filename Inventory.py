@@ -169,11 +169,15 @@ while not finished:
         userTake = input("Do you want to take the toothbrush?: ")
         if userTake == "y":
             hasToothbrush = True
-            
+        else:
+            print("You leave the toothbrush as it is.")
+
     if onQuest is True and current_room == 7:
         userTake = input("Do you want to take the teddy bear?: ")
         if userTake == "y":
             hasTeddy = True
+        else:
+            print("You leave the teddy bear as it is.")
 
     userInput = input("Which direction would you like to go?: ")
 
