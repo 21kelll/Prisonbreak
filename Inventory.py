@@ -4,8 +4,8 @@ name = str(input("What is your name? "))
 hasKey = False
 hasUniform = False
 onQuest = False
-hasApple = False
-
+hasToothbrush = False
+hasTeddy = False
 
 # This is to define the talk functions and dialogue for each NPC
 
@@ -140,11 +140,11 @@ while not finished:
                 print("Error: Invalid input. Only y or n is accepted")
 
         else:
-            if hasApple is True:
+            if hasToothbrush and hasTeddy:
                 print("Thanks (text) Here's the key.")
                 hasKey = True
             else:
-                print("ques.")
+                print("It doesn't look like you have my stuff...")
 
 
     # Ending game if prisoner comes free
@@ -165,10 +165,15 @@ while not finished:
         room_list[4].insert(room_list[4][0], "new description of supply room now open")
         openSupply = True
 
-    if onQuest is True and current_room == 7:
-        userTake = input("Do you want to take")
+    if onQuest is True and current_room == 2:
+        userTake = input("Do you want to take the toothbrush?: ")
         if userTake == "y":
-            hasApple = True
+            hasToothbrush = True
+            
+    if onQuest is True and current_room == 7:
+        userTake = input("Do you want to take the teddy bear?: ")
+        if userTake == "y":
+            hasTeddy = True
 
     userInput = input("Which direction would you like to go?: ")
 
