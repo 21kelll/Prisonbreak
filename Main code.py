@@ -130,16 +130,14 @@ of the yard.""", None, None, 9, None]
 
     # -- Main Loop
     finished = False
+    hasKey = False
+    hasUniform = False
+    commotion = False
+    onQuest = False
+    hasTeddy = False
+    hasToothbrush = False
 
     while finished is False:
-        hasKey = False
-        hasUniform = False
-        commotion = False
-        onQuest = False
-        hasTeddy = False
-        hasToothbrush = False
-
-        print(room_list[current_room][0])
 
         # to ensure that the player does not attempt to go into the wardens office without a commotion
         if current_room == 6 and commotion is False:
@@ -197,45 +195,38 @@ of the yard.""", None, None, 9, None]
                     pass
                 else:
                     print("Error: Invalid input. Only y or n is accepted")
-
-            # when on quest in search of items
-            if onQuest is True and current_room == 2:
-                userTake = input("Do you want to take the toothbrush?: ")
-                if userTake == "y":
-                    hasToothbrush = True
-                else:
-                    print("You leave the toothbrush as it is.")
-
-            if onQuest is True and current_room == 7:
-                userTake = input("Do you want to take the teddy bear?: ")
-                if userTake == "y":
-                    hasTeddy = True
-                else:
-                    print("You leave the teddy bear as it is.")
-
-            # once commotion has started
-            if commotion is True and current_room == 9:
-                print("""There is a big commotion in the yard with the prisoners and the Guard is there trying to 
-            break it up.""")
-
             # once the player has acquired all items and returned to alpha
-
-            if hasToothbrush is True and hasTeddy is True:
+            elif hasToothbrush is True and hasTeddy is True:
                 # starts commotion
                 print("""'Thanks. I owe you one, consider this my way of repaying you...
             I'll make sure we start some commotion so we can distract the guard by the wardens office, 
             make sure you go in and grab the key.'""")
                 commotion = True
                 print("The alpha starts rounding up prisoners to start a commotion")
-            elif hasToothbrush:
-                print("'Thanks, Now go get my teddy'")
-            elif hasTeddy:
-                print("'Thanks, now go get my toothbrush'")
             else:
                 print("'It doesn't look like you have my stuff...'")
 
+            # when on quest in search of items
+        if onQuest is True and current_room == 2:
+            userTake = input("Do you want to take the toothbrush?: ")
+            if userTake == "y":
+                hasToothbrush = True
+            else:
+                print("You leave the toothbrush as it is.")
+        if onQuest is True and current_room == 7:
+            userTake = input("Do you want to take the teddy bear?: ")
+            if userTake == "y":
+                hasTeddy = True
+            else:
+                print("You leave the teddy bear as it is.")
+
+        # once commotion has started
+        if commotion is True and current_room == 9:
+            print("""There is a big commotion in the yard with the prisoners and the Guard is there trying to 
+        break it up.""")
+
         # when the supply room can be unlocked, removes the supply room from the list and adds in the newly open one
-        if hasKey is True:
+        if hasKey is True and current_room == 4:
             room_list[4].remove(room_list[4][0])
             room_list[4].insert(room_list[4][0], "You open the supply room with the key. You manage to step inside.")
 
@@ -263,6 +254,7 @@ of the yard.""", None, None, 9, None]
             print("... Thanks for playing! You've completed the game.")
 
         # These are all of the direction and interactive codes. They are not part of the story.
+        print(room_list[current_room][0])
 
         userInput = input("Which direction would you like to go?: ")
 
