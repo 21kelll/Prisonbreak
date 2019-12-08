@@ -116,7 +116,7 @@ The guard nears you and grabs your arm and chuckles... "Bad idea buddy".""", 8, 
     room_list.append(room)
 
     # -- freedom (11)
-    room = ["You are free!"]
+    room = ["Congratulations! Thank you for playing"]
     room_list.append(room)
 
     # -- alpha (12)
@@ -153,12 +153,6 @@ of the yard.""", None, None, 9, None]
             print("""You wake up after a few days in your cell. You probably shouldn't snoop around the warden's office
         while the guard is there...""")
 
-        # for when there is a commotion and the warden's office is accessible
-        if commotion is True:
-            room_list[6].remove(room_list[6][0])
-            room_list[6].insert(room_list[6][0], """You enter into the Warden's office as the guard deals with the 
-        commotion in the yard. You spot the key on the Warden's desk and go to grab it... You now have the key!!""")
-
         # this is to ensure that the player does not attempt to escape prematurely
         if current_room == 10 and hasUniform is False:
             current_room = 0
@@ -188,7 +182,7 @@ of the yard.""", None, None, 9, None]
                     time.sleep(2)
                     print("I lost some things around the prison that my mama gave to me:")
                     print("""some of my treasured objects. Maybe if you found them and got them to me I could find a way 
-                to distract the guard away from the warden’s office.""")
+        to distract the guard away from the warden’s office.""")
                     onQuest = True
                 elif approachcheck == "n":
                     print("You decide not to approach him")
@@ -199,8 +193,8 @@ of the yard.""", None, None, 9, None]
             elif hasToothbrush is True and hasTeddy is True:
                 # starts commotion
                 print("""'Thanks. I owe you one, consider this my way of repaying you...
-            I'll make sure we start some commotion so we can distract the guard by the wardens office, 
-            make sure you go in and grab the key.'""")
+    I'll make sure we start some commotion so we can distract the guard by the wardens office, 
+    make sure you go in and grab the key.'""")
                 commotion = True
                 print("The alpha starts rounding up prisoners to start a commotion")
             else:
@@ -210,12 +204,19 @@ of the yard.""", None, None, 9, None]
         if onQuest is True and current_room == 2:
             userTake = input("Do you want to take the toothbrush?: ")
             if userTake == "y":
+                room_list.remove(room_list[2])
+                room_list.insert(2, ["""You find yourself inside of the bathroom. The door to back the hallway is 
+            north""", 1, None, None, None])
                 hasToothbrush = True
             else:
                 print("You leave the toothbrush as it is.")
         if onQuest is True and current_room == 7:
             userTake = input("Do you want to take the teddy bear?: ")
             if userTake == "y":
+                room_list.remove(room_list[7])
+                room_list.insert(7, ["""Stepping into the cafeteria you are confronted by a sight, you see a rotten 
+            apple sitting on the table and a plate of food that smells like it has been there for weeks. To the north 
+            is the exit back into the hallway""", 5, None, None, None])
                 hasTeddy = True
             else:
                 print("You leave the teddy bear as it is.")
@@ -225,14 +226,23 @@ of the yard.""", None, None, 9, None]
             print("""There is a big commotion in the yard with the prisoners and the Guard is there trying to 
         break it up.""")
 
+        # for when there is a commotion and the warden's office is accessible
+        if commotion is True and current_room == 6:
+            room_list.remove(room_list[6])
+            room_list.insert(6, ["""You enter into the Warden's office as the guard deals with the 
+        commotion in the yard. You spot the key on the Warden's desk and go to grab it... You now have the key!
+        !""", None, None, 5, None])
+            hasKey = True
+
         # when the supply room can be unlocked, removes the supply room from the list and adds in the newly open one
         if hasKey is True and current_room == 4:
-            room_list[4].remove(room_list[4][0])
-            room_list[4].insert(room_list[4][0], "You open the supply room with the key. You manage to step inside.")
+            room_list.remove(room_list[4])
+            room_list.insert(4, ["Now on to the exit?", None, None, 3, None])
 
         # when has key
 
         if current_room == 4 and hasKey is True:
+            print("You open the supply room with the key. You manage to step inside.")
             time.sleep(1)
             print("In front of you there is a rack with multiple uniforms for guards.")
             time.sleep(2)
@@ -245,13 +255,14 @@ of the yard.""", None, None, 9, None]
             print("You will escape!")
             hasUniform = True
 
-        if hasUniform is True:
-            room_list[10].remove(room_list[10][3])
-            room_list[3].insert(room_list[10][3], 11)
+        if hasUniform is True and current_room == 10:
+            current_room = 11
 
         # Ending game if prisoner comes free
         if current_room == 11:
-            print("... Thanks for playing! You've completed the game.")
+            print(""""... You slowly step outside of the prison, you were able to get past the guards. You've 
+            escaped and completed the game!""")
+            break
 
         # These are all of the direction and interactive codes. They are not part of the story.
         print(room_list[current_room][0])
